@@ -53,6 +53,9 @@ const COLOR_PALETTE = [
 ];
 export class Camera {
   constructor() {
+    this.left_ear={y: 0, x: 0, score: 0, name: 'left_ear'}
+    this.right_ear={y: 0, x: 0, score: 0, name: 'right_ear'}
+    this.neck_center={y: 0, x: 0, score: 0, name: 'neck_center'}
     this.video = document.getElementById('video');
     this.canvas = document.getElementById('output');
     this.ctx = this.canvas.getContext('2d');
@@ -173,8 +176,6 @@ export class Camera {
   /**
    * Draw the keypoints on the video.
    * @param keypoints A list of keypoints.
-   * @param left_eye
-   * @param right_eye
    */
 
   drawEarResult(pose) {
@@ -193,9 +194,13 @@ export class Camera {
     this.drawNeck(keypoints);
     }
 
-  l2_dist(x,y){
 
+  l2_dist(k1, k2){
+    let a=(k1.x-k2.x)
+    let b=(k1.y-k2.y)
+    return Math.sqrt( a*a + b*b )
   }
+    
 
   drawNeck(keypoints) {
     // If score is null, just show the keypoint.
@@ -205,35 +210,49 @@ export class Camera {
 
     const score=Math.min(score5, score6)
 
-    let x_=(keypoints[5].x+keypoints[6].x)/2
-    let y_=(keypoints[5].y+keypoints[6].y)/2
-
-    let a=(keypoints[5].x-keypoints[6].x)
-    let b=(keypoints[5].y-keypoints[6].y)
-    let hdist = 1.25*Math.sqrt( a*a + b*b );
-    let vdist=(2*hdist)/(3*1.5)
 
     if (score >= scoreThreshold) {
-      this.ctx.drawImage(this.necklace, x_-(hdist/4), y_-(vdist/3), hdist/2, vdist);
+      let thres=6;
+      if (isMobile()){
+        thres=4
+      }
+      let keypoint_=JSON.parse(JSON.stringify(keypoints[4]));
+  
+      keypoint_.x=(keypoints[5].x+keypoints[6].x)/2
+      keypoint_.y=(keypoints[5].y+keypoints[6].y)/2
+  
+      if(this.l2_dist(this.neck_center, keypoint_)>thres){
+        console.log(this.l2_dist(this.neck_center, keypoint_))
+        this.neck_center=JSON.parse(JSON.stringify(keypoint_));
+      }
+  
+      let hdist = 1.25*this.l2_dist(keypoints[5], keypoints[6]);
+      let vdist=(2*hdist)/(3*1.5)
+      this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/4), this.neck_center.y-(vdist/3), hdist/2, vdist);
     }
   }
 
   
   drawEar(keypoints) {
 
-    let left_ear=keypoints[3];
-    let right_ear=keypoints[4];
-    if (isMobile()){
-      left_ear.y+=15
-      right_ear.y+=15
-    }else{
-      left_ear.y+=20
-      right_ear.y+=20
 
-    }
+      let left_ear_=keypoints[3];
+      if (isMobile()){
+        left_ear_.y+=12
+      }else{
+        left_ear_.y+=16
+      }
+      
+      let right_ear_=keypoints[4];
+      if (isMobile()){
+        right_ear_.y+=12
+      }else{
+        right_ear_.y+=16
+      }
 
-    this.drawEarings(left_ear);
-    this.drawEarings(right_ear);
+      this.drawEarings(left_ear_, "left");
+      this.drawEarings(right_ear_, "right");
+    
   }
 
   drawKeypoints(keypoints) {
@@ -258,13 +277,37 @@ export class Camera {
     }
   }
 
-  drawEarings(keypoint) {
+  drawEarings(keypoint, ear) {
     // If score is null, just show the keypoint.
     const score = keypoint.score != null ? keypoint.score : 1;
     const scoreThreshold = params.STATE.modelConfig.scoreThreshold || 0;
 
     if (score >= scoreThreshold) {
-      this.ctx.drawImage(this.earring, keypoint.x-15, keypoint.y, 40, 50);
+      let thres=5;
+      if(isMobile()){
+        thres=4;
+      }
+
+      let last_ear= JSON.parse(JSON.stringify(this.left_ear));
+      if(ear=='right'){
+        last_ear= JSON.parse(JSON.stringify(this.right_ear));
+      }
+
+      if(this.l2_dist(keypoint, last_ear)>thres){
+          
+        if(ear=='left'){
+          this.left_ear=JSON.parse(JSON.stringify(keypoint));
+        }else{
+          this.right_ear=JSON.parse(JSON.stringify(keypoint));
+        }
+
+        this.ctx.drawImage(this.earring, keypoint.x-15, keypoint.y, 40, 50);
+
+      }else{
+        this.ctx.drawImage(this.earring, last_ear.x-15, last_ear.y, 40, 50);
+
+      }
+      
     }
   }
   drawKeypoint(keypoint) {
