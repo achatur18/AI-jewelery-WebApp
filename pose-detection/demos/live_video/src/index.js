@@ -42,7 +42,7 @@ let config={
   inputResolution: { width: 500, height: 500 },
   multiplier: 0.75
 };
-if (isMobile){
+if (isMobile()){
   config={
     quantBytes: 2,
     architecture: 'MobileNetV1',
@@ -55,9 +55,8 @@ if (isMobile){
 async function createDetector() {
   switch (STATE.model) {
     case posedetection.SupportedModels.PoseNet:
-      return posedetection.createDetector(STATE.model, config
-      
-      );
+      return posedetection.createDetector(STATE.model, config);
+
     case posedetection.SupportedModels.BlazePose:
       const runtime = STATE.backend.split('-')[0];
       if (runtime === 'mediapipe') {

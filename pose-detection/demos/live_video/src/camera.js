@@ -222,7 +222,6 @@ export class Camera {
       keypoint_.y=(keypoints[5].y+keypoints[6].y)/2
   
       if(this.l2_dist(this.neck_center, keypoint_)>thres){
-        console.log(this.l2_dist(this.neck_center, keypoint_))
         this.neck_center=JSON.parse(JSON.stringify(keypoint_));
       }
   
