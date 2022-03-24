@@ -40,11 +40,11 @@ async function createDetector() {
   switch (STATE.model) {
     case posedetection.SupportedModels.PoseNet:
       return posedetection.createDetector(STATE.model, {
-        quantBytes: 4,
+        quantBytes: 2,
         architecture: 'MobileNetV1',
         outputStride: 16,
         inputResolution: { width: 500, height: 500 },
-        multiplier: 0.75
+        multiplier: 0.5
       });
     case posedetection.SupportedModels.BlazePose:
       const runtime = STATE.backend.split('-')[0];
