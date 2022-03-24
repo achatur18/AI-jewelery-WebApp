@@ -164,38 +164,7 @@ export class Camera {
       this.drawKeypoints3D(pose.keypoints3D);
     }
   }
-
-  // addEarings(offX, offY) {
-  //   // myImage : ID of image on which to place new image
-
-  //   // var image = document.getElementById('myImage');
-
-  //   // console.log(image.width);
-
-  //   margin = 20;
-
-  //   l = this.canvas.offsetLeft;
-  //   t = this.canvas.offsetTop;
-  //   w = this.canvas.width;
-  //   h = this.canvas.height;
-
-  //   // Location inside the image
-  //   // offX = parseInt(Math.random() * w);
-  //   // offY = parseInt(Math.random() * h);
-
-  //   if (offX > margin) offX -= margin;
-  //   if (offY > margin) offY -= margin;
-
-  //   l += offX;
-  //   t += offY;
-
-  //   // var newImage = document.createElement("img");
-  //   this.earring.setAttribute('src', 'http://img.informer.com/icons/png/48/3552/3552212.png');
-  //   this.earring.setAttribute('class', 'overlays');
-  //   this.earring.style.left = l + "px";
-  //   this.earring.style.top = t + "px";
-  //   // document.body.appendChild(this.earring);
-  // }
+  
   drawEarResults(poses) {
     for (const pose of poses) {
       this.drawEarResult(pose);
@@ -204,6 +173,8 @@ export class Camera {
   /**
    * Draw the keypoints on the video.
    * @param keypoints A list of keypoints.
+   * @param left_eye
+   * @param right_eye
    */
 
   drawEarResult(pose) {
@@ -249,12 +220,21 @@ export class Camera {
 
   
   drawEar(keypoints) {
-    for (const i in keypoints) {
-      if (i == 3 || i == 4) {
-        keypoints[i].y += 20
-        this.drawEarings(keypoints[i]);
-      }
-  }}
+
+    let left_ear=keypoints[3];
+    let right_ear=keypoints[4];
+    if (isMobile()){
+      left_ear.y+=15
+      right_ear.y+=15
+    }else{
+      left_ear.y+=20
+      right_ear.y+=20
+
+    }
+
+    this.drawEarings(left_ear);
+    this.drawEarings(right_ear);
+  }
 
   drawKeypoints(keypoints) {
     const keypointInd =
