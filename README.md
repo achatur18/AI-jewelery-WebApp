@@ -2,9 +2,11 @@
 1) `git clone <repo>`
 2) `cd pose-detection/demos/live_video`
 3) install latest version of node
-    `curl https://raw.github.com/creationix/nvm/master/install.sh | sh`
-    `source ~/.nvm/nvm.sh`
-    `nvm install 12  #(or whatever version of Node.js you want)`
+   * `curl https://raw.github.com/creationix/nvm/master/install.sh | sh`
+
+   * `source ~/.nvm/nvm.sh`
+   
+   * `nvm install 12  #(or whatever version of Node.js you want)`
     
 4) Remove cache etc. `rm -rf .cache dist node_modules`
 
