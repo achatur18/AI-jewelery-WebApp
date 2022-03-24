@@ -29,23 +29,35 @@ import { Camera } from './camera';
 import { setupDatGui } from './option_panel';
 import { STATE } from './params';
 import { setupStats } from './stats_panel';
-import { setBackendAndEnvFlags } from './util';
+import { isMobile, setBackendAndEnvFlags } from './util';
 
 let detector, camera, stats;
 let startInferenceTime, numInferences = 0;
 let inferenceTimeSum = 0, lastPanelUpdate = 0;
 let rafId;
+let config={
+  quantBytes: 4,
+  architecture: 'MobileNetV1',
+  outputStride: 16,
+  inputResolution: { width: 500, height: 500 },
+  multiplier: 0.75
+};
+if (isMobile){
+  config={
+    quantBytes: 2,
+    architecture: 'MobileNetV1',
+    outputStride: 16,
+    inputResolution: { width: 300, height: 300 },
+    multiplier: 0.5
+  };
+}
 
 async function createDetector() {
   switch (STATE.model) {
     case posedetection.SupportedModels.PoseNet:
-      return posedetection.createDetector(STATE.model, {
-        quantBytes: 2,
-        architecture: 'MobileNetV1',
-        outputStride: 16,
-        inputResolution: { width: 300, height: 300 },
-        multiplier: 0.5
-      });
+      return posedetection.createDetector(STATE.model, config
+      
+      );
     case posedetection.SupportedModels.BlazePose:
       const runtime = STATE.backend.split('-')[0];
       if (runtime === 'mediapipe') {
