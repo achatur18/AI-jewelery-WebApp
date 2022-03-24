@@ -43,7 +43,7 @@ async function createDetector() {
         quantBytes: 2,
         architecture: 'MobileNetV1',
         outputStride: 16,
-        inputResolution: { width: 500, height: 500 },
+        inputResolution: { width: 300, height: 300 },
         multiplier: 0.5
       });
     case posedetection.SupportedModels.BlazePose:
