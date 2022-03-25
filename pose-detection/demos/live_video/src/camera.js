@@ -210,7 +210,6 @@ export class Camera {
 
     const score=Math.min(score5, score6)
 
-
     if (score >= scoreThreshold) {
       let thres=6;
       if (isMobile()){
@@ -220,12 +219,13 @@ export class Camera {
   
       keypoint_.x=(keypoints[5].x+keypoints[6].x)/2
       keypoint_.y=(keypoints[5].y+keypoints[6].y)/2
+
   
       if(this.l2_dist(this.neck_center, keypoint_)>thres){
         this.neck_center=JSON.parse(JSON.stringify(keypoint_));
       }
   
-      let hdist = 1.25*this.l2_dist(keypoints[5], keypoints[6]);
+      let hdist = 1.25*320;
       let vdist=(2*hdist)/(3*1.5)
       this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/4), this.neck_center.y-(vdist/3), hdist/2, vdist);
     }
