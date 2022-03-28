@@ -33,6 +33,7 @@ const stringValueMap = {};
 export async function setupDatGui(urlParams) {
   const gui = new dat.GUI({width: 300});
   gui.domElement.id = 'gui';
+  gui.close()
 
   // The camera folder contains options for video settings.
   const cameraFolder = gui.addFolder('Camera');
@@ -45,7 +46,7 @@ export async function setupDatGui(urlParams) {
   sizeController.onChange(_ => {
     params.STATE.isSizeOptionChanged = true;
   });
-  cameraFolder.open();
+  cameraFolder.close();
 
   // The model folder contains options for model selection.
   const modelFolder = gui.addFolder('Model');
@@ -87,13 +88,13 @@ export async function setupDatGui(urlParams) {
 
   showModelConfigs(modelFolder, type);
 
-  modelFolder.open();
+  modelFolder.close();
 
   const backendFolder = gui.addFolder('Backend');
 
   showBackendConfigs(backendFolder);
 
-  backendFolder.open();
+  backendFolder.close();
 
   return gui;
 }
