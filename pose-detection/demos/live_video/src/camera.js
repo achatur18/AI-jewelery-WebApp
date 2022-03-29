@@ -225,7 +225,7 @@ export class Camera {
         this.neck_center=JSON.parse(JSON.stringify(keypoint_));
       }
   
-      let hdist = 25*Math.floor((this.l2_dist(keypoints[5], keypoints[6])/20));
+      let hdist = 35*Math.floor((this.l2_dist(keypoints[5], keypoints[6])/20));
       let vdist=(2*hdist)/(3*1.5)
       this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/4), this.neck_center.y-(vdist/3), hdist/2, vdist);
     }
