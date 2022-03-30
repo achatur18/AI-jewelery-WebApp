@@ -18,6 +18,14 @@ limitations under the License.
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>
+    function btn_click( image_) {
+      document.getElementById('earring').src=image_;
+      // $('.button').click(function(){
+      //   $('#earring').attr('src', image_);
+      // });
+    }
+
+
     var openFile = function(file, id) {
       var input = file.target;
     
@@ -28,7 +36,8 @@ limitations under the License.
         output.src = dataURL;
       };
       reader.readAsDataURL(input.files[0]);
-    };</script>
+    };
+    </script>
   <style>
     .dropbtn {
             background-color: #5d5f5d;
@@ -95,10 +104,106 @@ limitations under the License.
 </head>
 <body>
 
+  <div class="jumbotron text-center">
+    <h1>AI Jewellery demo</h1>
+    <!-- <p>Resize this responsive page to see the effect!</p>  -->
+  </div>
+  
+  
+<div class="container">
+  <div class="text-center"> <h2>Select Earings</h2></div>
+ 
+  <div id='myCarouselEar' class="row carousel slide" data-ride="carousel">
+  
+    <div class="col-md-4 carousel-inner">
+      <div class="thumbnail item active">
+          <img src="assets/ear3.png" id ="ear3" alt="Lights" style="width:10%">ear3
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success" id="bttn" onclick="btn_click('assets/ear3.png')">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/ear2.png" id="ear2"  alt="Nature" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/ear.png" id="ear" alt="Fjords" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/ear4.png" id="ear4" alt="Fjords" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarouselEar" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarouselEar" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
 
-<div class="jumbotron text-center">
-  <h1>AI Jewellery demo</h1>
-  <!-- <p>Resize this responsive page to see the effect!</p>  -->
+<div class="container">
+  <div class="text-center"> <h2>Select Neck piece</h2></div>
+ 
+  <div id='myCarouselNeck' class="row carousel slide" data-ride="carousel">
+  
+    <div class="col-md-4 carousel-inner">
+      <div class="thumbnail item active">
+          <img src="assets/necklace.png" alt="Lights" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/necklace2.png" alt="Nature" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/neck3.png" alt="Fjords" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success">Select</button>
+          </div>
+        </a>
+      </div>
+      <div class="thumbnail item">
+          <img src="/assets/neck44.png" alt="Fjords" style="width:10%">
+          <div class="caption text-center">
+            <button type="button" class="btn btn-success">Select</button>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarouselNeck" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarouselNeck" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
 
 
@@ -145,12 +250,12 @@ limitations under the License.
 
 
   
-<div class="container">
+<div class="container jumbotron">
   <div class="row">
     <div class="col-sm-4">
       <h3>Select Earings Image</h3>
         <input type='file' accept='image/*' onchange="openFile(event, 'earring')"><br>
-        <img id='earring'  ><br>
+        <img id='earring'><br>
 
     </div>
     <div class="col-sm-4">
@@ -190,11 +295,6 @@ limitations under the License.
 </div>
 
 
-  <!-- <input type='file' accept='image/*' onchange="openFile(event, 'necklace')"><br>
-  <img id='necklace' > -->
-
-
-  
 
   <!-- <img src="ear.png" alt="earing" id="earring" height='1' width='1'/>
   <img src="necklace.png" alt="necklace" id="necklace" height='1' width='1'/> -->
