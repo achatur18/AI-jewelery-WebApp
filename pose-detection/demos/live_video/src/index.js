@@ -195,9 +195,20 @@ async function renderPrediction() {
   rafId = requestAnimationFrame(renderPrediction);
 };
 
+
 async function app() {
   // Gui content will change depending on which model is in the query string.
-  const urlParams = new URLSearchParams(window.location.search);
+  let query= window.location.search;
+  query=query.split("&");
+  let ear_=query[1];
+  let neck_=query[2];
+  console.log(ear_, neck_);
+
+
+  
+
+
+  const urlParams = new URLSearchParams(query[0]);
   if (!urlParams.has('model')) {
     alert('Cannot find model in the query string.');
     return;
