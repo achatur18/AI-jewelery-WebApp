@@ -190,8 +190,11 @@ export class Camera {
     this.ctx.strokeStyle = 'White';
     this.ctx.lineWidth = params.DEFAULT_LINE_WIDTH;
 
-    this.drawEar(keypoints);
-    this.drawNeck(keypoints);
+    let shoulder_dist=20*Math.floor(this.l2_dist(keypoints[5], keypoints[6])/20);
+
+
+    this.drawEar(keypoints, shoulder_dist);
+    this.drawNeck(keypoints, shoulder_dist);
     }
 
 
@@ -202,7 +205,7 @@ export class Camera {
   }
     
 
-  drawNeck(keypoints) {
+  drawNeck(keypoints, shoulder_dist) {
     // If score is null, just show the keypoint.
     const score5 = keypoints[5].score != null ? keypoints[5].score : 1;
     const score6 = keypoints[6].score != null ? keypoints[6].score : 1;
@@ -211,7 +214,7 @@ export class Camera {
     const score=Math.min(score5, score6)
 
     if (score >= scoreThreshold) {
-      let thres=6;
+      let thres=8;
       if (isMobile()){
         thres=4
       }
@@ -224,15 +227,17 @@ export class Camera {
       if(this.l2_dist(this.neck_center, keypoint_)>thres){
         this.neck_center=JSON.parse(JSON.stringify(keypoint_));
       }
+
   
-      let hdist = 35*Math.floor((this.l2_dist(keypoints[5], keypoints[6])/20));
-      let vdist=(2*hdist)/(3*1.5)
-      this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/4), this.neck_center.y-(vdist/3), hdist/2, vdist);
+      let hdist = 0.8*shoulder_dist;
+      let vdist=hdist;
+
+      this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/2), this.neck_center.y-(vdist/3), hdist, vdist);
     }
   }
 
   
-  drawEar(keypoints) {
+  drawEar(keypoints, shoulder_dist) {
 
 
       let left_ear_=keypoints[3];
@@ -248,9 +253,8 @@ export class Camera {
       }else{
         right_ear_.y+=16
       }
-
-      this.drawEarings(left_ear_, "left");
-      this.drawEarings(right_ear_, "right");
+      this.drawEarings(left_ear_, "left", shoulder_dist);
+      this.drawEarings(right_ear_, "right", shoulder_dist);
     
   }
 
@@ -276,13 +280,20 @@ export class Camera {
     }
   }
 
-  drawEarings(keypoint, ear) {
+  drawEarings(keypoint, ear, shoulder_dist) {
     // If score is null, just show the keypoint.
     const score = keypoint.score != null ? keypoint.score : 1;
     const scoreThreshold = params.STATE.modelConfig.scoreThreshold || 0;
 
+    // let h_=this.earring.height;
+    // let w_=this.earring.width;
+    shoulder_dist=30*shoulder_dist/30;
+    let ratio_hw=this.earring.height/this.earring.width;
+    let w_=shoulder_dist*0.065;
+    let h_=w_*ratio_hw;
+
     if (score >= scoreThreshold) {
-      let thres=8;
+      let thres=5;
       if(isMobile()){
         thres=4;
       }
@@ -300,10 +311,10 @@ export class Camera {
           this.right_ear=JSON.parse(JSON.stringify(keypoint));
         }
 
-        this.ctx.drawImage(this.earring, keypoint.x-15, keypoint.y, 40, 50);
+        this.ctx.drawImage(this.earring, keypoint.x-(w_/2), keypoint.y, w_, h_);
 
       }else{
-        this.ctx.drawImage(this.earring, last_ear.x-15, last_ear.y, 40, 50);
+        this.ctx.drawImage(this.earring, last_ear.x-(w_/2), last_ear.y, w_, h_);
 
       }
       

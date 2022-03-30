@@ -30,6 +30,50 @@ limitations under the License.
       reader.readAsDataURL(input.files[0]);
     };</script>
   <style>
+    .dropbtn {
+            background-color: #5d5f5d;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+  
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+  
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 
+                0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+  
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+  
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+  
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+  
+        .dropdown:hover .dropbtn {
+            background-color: #727472;
+        }
+  </style>
+  <style>
     body {
       margin: 0;
     }
@@ -56,19 +100,63 @@ limitations under the License.
   <h1>AI Jewellery demo</h1>
   <!-- <p>Resize this responsive page to see the effect!</p>  -->
 </div>
+
+
+<!-- <center>
+  <h1 style="color: gray">
+      Select Jewellery
+  </h1>
+
+
+  <div class="dropdown">
+    <button class="dropbtn">
+        Necklace
+    </button>
+      
+    <div class="dropdown-content">
+        <a href="#">
+            <img src="assets/necklace.png"
+            width="20" height="15"> India</a>
+
+        <a href="#">
+            <img src="assets/necklace2.png"
+            width="20" height="15"> USA</a>
+
+    </div>
+  </div>
+    
+  <div class="dropdown">
+      <button class="dropbtn">
+          Earings
+      </button>
+        
+      <div class="dropdown-content">
+          <a href="#">
+              <img src="assets/ear.png"
+              width="20" height="15"> India</a>
+
+          <a href="#">
+              <img src="assets/ear2.png"
+              width="20" height="15"> USA</a>
+
+      </div>
+  </div>
+</center> -->
+
+
   
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h3>Select Earings Image</h3>
         <input type='file' accept='image/*' onchange="openFile(event, 'earring')"><br>
-        <img id='earring' width="500" height="500" ><br>
+        <img id='earring'  ><br>
 
     </div>
     <div class="col-sm-4">
       <h3>Select Necklace Image</h3>
       <input type='file' accept='image/*' onchange="openFile(event, 'necklace')"><br>
-      <img id='necklace' width="500" height="500">
+      <img id='necklace' width="250" height="250">
     </div>
     <!-- <div class="col-sm-4">
       <h3>Column 3</h3>        
