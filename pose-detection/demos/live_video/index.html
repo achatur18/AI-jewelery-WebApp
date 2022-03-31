@@ -19,16 +19,20 @@ limitations under the License.
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>
     function btn_click( image_) {
-      document.getElementById('earring').src=image_;
-      // $('.button').click(function(){
-      //   $('#earring').attr('src', image_);
-      // });
+      document.getElementById('earring').src="assets/ear.png";
     }
+
+
+    var openImage = function(file, id) {
+      var input = file.target;
+      document.getElementById(id).src=input.src;
+    };
 
 
     var openFile = function(file, id) {
       var input = file.target;
-    
+      console.log(input)
+
       var reader = new FileReader();
       reader.onload = function(){
         var dataURL = reader.result;
@@ -117,31 +121,19 @@ limitations under the License.
   
     <div class="col-md-4 carousel-inner">
       <div class="thumbnail item active">
-          <img src="assets/ear3.png" id ="ear3" alt="Lights" style="width:10%">ear3
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success" id="bttn" onclick="btn_click('assets/ear3.png')">Select</button>
-          </div>
+          <img src="assets/ear3.png" id ="ear3" alt="Lights" style="width:10%" onclick="openImage(event, 'earring')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/ear2.png" id="ear2"  alt="Nature" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
-          </div>
+          <img src="/assets/ear2.png" id="ear2"  alt="Nature" style="width:10%"  onclick="openImage(event, 'earring')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/ear.png" id="ear" alt="Fjords" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
-          </div>
+          <img src="/assets/ear.png" id="ear" alt="Fjords" style="width:10%" onclick="openImage(event, 'earring')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/ear4.png" id="ear4" alt="Fjords" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success" onclick="btn_click('assets/ear3.png')">Select</button>
-          </div>
+          <img src="/assets/ear4.png" id="ear4" alt="Fjords" style="width:10%" onclick="openImage(event, 'earring')">
         </a>
       </div>
     </div>
@@ -165,31 +157,19 @@ limitations under the License.
   
     <div class="col-md-4 carousel-inner">
       <div class="thumbnail item active">
-          <img src="assets/necklace.png" alt="Lights" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success">Select</button>
-          </div>
+          <img src="assets/necklace.png" alt="Lights" style="width:10%" onclick="openImage(event, 'necklace')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/necklace2.png" alt="Nature" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success">Select</button>
-          </div>
+          <img src="/assets/necklace2.png" alt="Nature" style="width:10%"  onclick="openImage(event, 'necklace')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/neck3.png" alt="Fjords" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success">Select</button>
-          </div>
+          <img src="/assets/neck3.png" alt="Fjords" style="width:10%"  onclick="openImage(event, 'necklace')">
         </a>
       </div>
       <div class="thumbnail item">
-          <img src="/assets/neck44.png" alt="Fjords" style="width:10%">
-          <div class="caption text-center">
-            <button type="button" class="btn btn-success">Select</button>
-          </div>
+          <img src="/assets/neck44.png" alt="Fjords" style="width:10%"  onclick="openImage(event, 'necklace')">
         </a>
       </div>
     </div>
@@ -207,69 +187,7 @@ limitations under the License.
 </div>
 
 
-<!-- <center>
-  <h1 style="color: gray">
-      Select Jewellery
-  </h1>
-
-
-  <div class="dropdown">
-    <button class="dropbtn">
-        Necklace
-    </button>
-      
-    <div class="dropdown-content">
-        <a href="#">
-            <img src="assets/necklace.png"
-            width="20" height="15"> India</a>
-
-        <a href="#">
-            <img src="assets/necklace2.png"
-            width="20" height="15"> USA</a>
-
-    </div>
-  </div>
-    
-  <div class="dropdown">
-      <button class="dropbtn">
-          Earings
-      </button>
-        
-      <div class="dropdown-content">
-          <a href="#">
-              <img src="assets/ear.png"
-              width="20" height="15"> India</a>
-
-          <a href="#">
-              <img src="assets/ear2.png"
-              width="20" height="15"> USA</a>
-
-      </div>
-  </div>
-</center> -->
-
-
   
-<div class="container jumbotron">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Select Earings Image</h3>
-        <input type='file' accept='image/*' onchange="openFile(event, 'earring')"><br>
-        <img id='earring'><br>
-
-    </div>
-    <div class="col-sm-4">
-      <h3>Select Necklace Image</h3>
-      <input type='file' accept='image/*' onchange="openFile(event, 'necklace')"><br>
-      <img id='necklace' width="250" height="250">
-    </div>
-    <!-- <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div> -->
-  </div>
-</div>
 
 
 <div class="container">
@@ -295,6 +213,21 @@ limitations under the License.
 </div>
 
 
+<div class="container jumbotron">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Select Custom Earings Image</h3>
+        <input type='file' accept='image/*' onchange="openFile(event, 'earring')"><br>
+        <img id='earring'><br>
+
+    </div>
+    <div class="col-sm-4">
+      <h3>Select Custom Necklace Image</h3>
+      <input type='file' accept='image/*' onchange="openFile(event, 'necklace')"><br>
+      <img id='necklace' width="250" height="250">
+    </div>
+  </div>
+</div>
 
   <!-- <img src="ear.png" alt="earing" id="earring" height='1' width='1'/>
   <img src="necklace.png" alt="necklace" id="necklace" height='1' width='1'/> -->
