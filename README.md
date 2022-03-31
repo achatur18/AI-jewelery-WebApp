@@ -1,6 +1,6 @@
 # Run AI jewelery demo
-1) `git clone https://github.com/achatur18/AI-jewelery-demo`
-2) `cd AI-jewelery-demo/pose-detection/demos/live_video`
+1) `git clone https://github.com/achatur18/AI-jewelery-WebApp.git`
+2) `cd AI-jewelery-WebApp/pose-detection/demos/live_video`
 3) install latest version of node
    * `curl https://raw.github.com/creationix/nvm/master/install.sh | sh`
 
