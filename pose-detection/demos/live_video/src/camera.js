@@ -241,18 +241,15 @@ export class Camera {
 
 
       let left_ear_=keypoints[3];
-      if (isMobile()){
-        left_ear_.y+=12
-      }else{
-        left_ear_.y+=16
-      }
-      
       let right_ear_=keypoints[4];
       if (isMobile()){
-        right_ear_.y+=12
+        left_ear_.y+=shoulder_dist/20;
+        right_ear_.y+=shoulder_dist/20;
       }else{
-        right_ear_.y+=16
+        left_ear_.y+=shoulder_dist/20+2;
+        right_ear_.y+=shoulder_dist/20+2;
       }
+      
       this.drawEarings(left_ear_, "left", shoulder_dist);
       this.drawEarings(right_ear_, "right", shoulder_dist);
     
@@ -298,9 +295,11 @@ export class Camera {
         thres=4;
       }
 
-      let last_ear= JSON.parse(JSON.stringify(this.left_ear));
+      let last_ear;
       if(ear=='right'){
         last_ear= JSON.parse(JSON.stringify(this.right_ear));
+      }else{
+        last_ear= JSON.parse(JSON.stringify(this.left_ear));
       }
 
       if(this.l2_dist(keypoint, last_ear)>thres){
@@ -310,14 +309,8 @@ export class Camera {
         }else{
           this.right_ear=JSON.parse(JSON.stringify(keypoint));
         }
-
-        this.ctx.drawImage(this.earring, keypoint.x-(w_/2), keypoint.y, w_, h_);
-
-      }else{
-        this.ctx.drawImage(this.earring, last_ear.x-(w_/2), last_ear.y, w_, h_);
-
       }
-      
+      this.ctx.drawImage(this.earring, last_ear.x-(w_/2), last_ear.y, w_, h_);
     }
   }
   drawKeypoint(keypoint) {
@@ -330,7 +323,7 @@ export class Camera {
       circle.arc(keypoint.x, keypoint.y, params.DEFAULT_RADIUS, 0, 2 * Math.PI);
       this.ctx.fill(circle);
       this.ctx.stroke(circle);
-      this.ctx.drawImage(this.earring, keypoint.x-15, keypoint.y, 30, 40);
+      // this.ctx.drawImage(this.earring, keypoint.x-15, keypoint.y, 30, 40);
     }
   }
 

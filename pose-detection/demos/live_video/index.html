@@ -70,13 +70,34 @@ limitations under the License.
     <!-- <p>Resize this responsive page to see the effect!</p>  -->
   </div>
   
+<div class="container">
+  <div class="row">
+  <div id="stats"></div>
+  <div id="main">
+    <div class="container">
+      <div class="canvas-wrapper">
+          <canvas id="output"></canvas>
+          <video id="video" playsinline style="
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            visibility: hidden;
+            width: auto;
+            height: auto;
+            ">
+          </video>
+      </div>
+      <div id="scatter-gl-container"></div>
+    </div>
+  </div>
+  </div>
+</div>
   
 <div class="container">
   <div class="text-center"> <h2>Select Earings</h2></div>
  
   <div id='myCarouselEar' class="row carousel slide" data-ride="carousel">
   
-    <div class="col-md-4 carousel-inner">
+    <div class="col-md-4 col-lg-4 carousel-inner">
       <div class="thumbnail item active">
           <img src="assets/ear3.png" id ="ear3" alt="Lights" style="width:10%" onclick="openImage(event, 'earring')">
         </a>
@@ -112,7 +133,7 @@ limitations under the License.
  
   <div id='myCarouselNeck' class="row carousel slide" data-ride="carousel">
   
-    <div class="col-md-4 carousel-inner">
+    <div class="col-md-4 col-lg-4 carousel-inner">
       <div class="thumbnail item active">
           <img src="assets/necklace.png" alt="Lights" style="width:10%" onclick="openImage(event, 'necklace')">
         </a>
@@ -147,29 +168,6 @@ limitations under the License.
   
 
 
-<div class="container">
-  <div class="row">
-  <div id="stats"></div>
-  <div id="main">
-    <div class="container">
-      <div class="canvas-wrapper">
-        <center>
-          <canvas id="output"></canvas>
-          <video id="video" playsinline style="
-            -webkit-transform: scaleX(-1);
-            transform: scaleX(-1);
-            visibility: hidden;
-            width: auto;
-            height: auto;
-            ">
-          </video>
-      </center>
-      </div>
-      <div id="scatter-gl-container"></div>
-    </div>
-  </div>
-  </div>
-</div>
 
 
 <div class="container jumbotron">
