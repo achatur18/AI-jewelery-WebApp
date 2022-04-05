@@ -229,7 +229,7 @@ export class Camera {
       }
 
   
-      let hdist = 0.7*shoulder_dist;
+      let hdist = 0.55*shoulder_dist;
       let vdist=hdist;
 
       this.ctx.drawImage(this.necklace, this.neck_center.x-(hdist/2), this.neck_center.y-(vdist*0.3), hdist, vdist);
